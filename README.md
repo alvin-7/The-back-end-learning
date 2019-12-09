@@ -8,4 +8,3 @@
 1. [Prim地图随机算法](https://github.com/zhuye-7/The-back-end-learning/blob/master/PrimAndAStar/Prim.md)
 2. [A*寻路算法](https://github.com/zhuye-7/The-back-end-learning/blob/master/PrimAndAStar/AStar.md)
 
-1
