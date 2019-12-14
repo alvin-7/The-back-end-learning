@@ -1,7 +1,7 @@
 ### 书籍：
 
 1. [《游戏编程模式》](https://github.com/zhuye-7/The-back-end-learning/blob/master/Books/%E3%80%8A%E6%B8%B8%E6%88%8F%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%BC%8F%E3%80%8B.md)
-2. 《游戏之旅，我的编程感悟》
+2. [《游戏之旅，我的编程感悟》](https://github.com/zhuye-7/The-back-end-learning/blob/master/Books/%E3%80%8A%E6%B8%B8%E6%88%8F%E4%B9%8B%E6%97%85-%E6%88%91%E7%9A%84%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F%E3%80%8B.md)
 3. 《网易一千零一夜》
 4. 《Linux多线程服务器编程 使用muduo C++网络库》
 5. 《高可用架构（第1卷）》
