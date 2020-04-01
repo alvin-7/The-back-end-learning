@@ -16,6 +16,7 @@ from threading import Thread
 
 import redis
 import time
+#import redlock
 
 #cli = redis.Redis(host='localhost', port=6379)		# 这个get出来的数据是byte
 cli = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
