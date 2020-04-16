@@ -9,10 +9,10 @@ import bisect
 
 
 class CConsistenHash:
-    def __init__(self, nodes=None, replicas=100):
+    def __init__(self, nodes=None, replicas=10):
         """_replicas: 虚拟节点数"""
         self._replicas = replicas
-        self._nodes = collections.defaultdict(dict) #{virNode: sRealNode}
+        self._v2r_nodes = collections.defaultdict(dict) #{virNode: sRealNode}
         self._sort_nodes = [] # 排序的虚拟节点hash值列表
 
         # hash规则
@@ -27,9 +27,11 @@ class CConsistenHash:
         for i in range(self._replicas):
             sVirNode = f"{sNode}#{i}"
             vir_node = self._hash_rule(sVirNode)
-            if vir_node in self._nodes:
-                raise Exception("err virnode: %s" % sVirNode)
-            self._nodes[vir_node] = sNode
+            if vir_node in self._v2r_nodes:
+                # 出现冲突删除生成的冲突节点并且直接抛异常
+                self.remove_clashnode(sNode, i)
+                raise Exception("clash virnode: %s" % sVirNode)
+            self._v2r_nodes[vir_node] = sNode
             bisect.insort_right(self._sort_nodes, vir_node)
 
     def remove_node(self, sNode):
@@ -38,7 +40,7 @@ class CConsistenHash:
         """
         for i in range(self._replicas):
             hashval = self._hash_rule(f"{sNode}#{i}")
-            del self._nodes[hashval]
+            del self._v2r_nodes[hashval]
             node_idx = bisect.bisect_left(self._sort_nodes, hashval)
             del self._sort_nodes[node_idx]
 
@@ -46,17 +48,29 @@ class CConsistenHash:
         """
         根据所给的key得到对应的节点
         """
-        assert self._nodes
+        assert self._v2r_nodes
 
         sortNodes = self._sort_nodes
         hashval = self._hash_rule(sKey)
         vir_index = bisect.bisect_right(sortNodes, hashval)
         if vir_index == len(sortNodes):
             vir_index = 0
-        return self._nodes[sortNodes[vir_index]]
+        return self._v2r_nodes[sortNodes[vir_index]]
+
+    def remove_clashnode(self, sNode, replicas):
+        """
+        移除冲突节点及其虚拟节点
+        @sNode: 出现冲突节点
+        @replicas: 在replicas出现冲突
+        """
+        for i in range(replicas):
+            hashval = self._hash_rule(f"{sNode}#{i}")
+            del self._v2r_nodes[hashval]
+            node_idx = bisect.bisect_left(self._sort_nodes, hashval)
+            del self._sort_nodes[node_idx]
 
 
-def test(replicas):
+def _Test_Hash(replicas):
     content = """In computer science, consistent hashing is a special 
     kind of hashing such that when a hash table is resized, only 
     {\displaystyle n/m}n/m keys need to be remapped on average where 
@@ -84,8 +98,8 @@ def test(replicas):
         myNodes[hr.get_node(skey)].append(skey)
 
     for node, result in myNodes.items():
-        print(f"{node} = {len(result)}\nresult={result}\n")
+        print(f"{node} = {len(result)}\nresult={result}")
 
 
 if __name__ == '__main__':
-    test(100)
+    _Test_Hash(10)
