@@ -14,6 +14,7 @@
 2. [A*寻路算法](https://github.com/zhuye-7/The-back-end-learning/blob/master/Algorithm/PrimAndAStar/AStar.md)
 3. 树
    1. 完全二叉树
+4. [一致性Hash](https://github.com/zhuye-7/The-back-end-learning/blob/master/Algorithm/ConsistentHash/consistentHash.py)
 
 ### 学习站点
 
