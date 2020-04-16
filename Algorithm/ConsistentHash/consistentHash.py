@@ -12,7 +12,7 @@ class CConsistenHash:
     def __init__(self, nodes=None, replicas=10):
         """_replicas: 虚拟节点数"""
         self._replicas = replicas
-        self._v2r_nodes = collections.defaultdict(str) #{virNode: sRealNode}
+        self._v2r_nodes = {} #{virNode: sRealNode}
         self._sort_nodes = [] # 排序的虚拟节点hash值列表
 
         # hash规则
