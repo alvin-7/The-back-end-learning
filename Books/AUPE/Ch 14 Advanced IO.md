@@ -112,7 +112,7 @@ nwrite = 347, errno = 0
 
 ## 二、记录锁
 
-![record_locking](images/zhuye/record_locking.png)
+![record_locking](images/record_locking.png)
 
 **记录锁的功能是：**
 
@@ -132,23 +132,23 @@ int fcntl(int fd, int cmd, .../* struct flock *flockptr */);
 
 **参数说明**
 
-![fcntl](images/zhuye/fcntl.png)
+![fcntl](images/fcntl.png)
 
 **flock结构说明**
 
-![fcntlinfo](images/zhuye/fcntlinfo.png)
+![fcntlinfo](images/fcntlinfo.png)
 
 **共享读锁和独占写锁**
 
-![lock](images/zhuye/lock.png)
+![lock](images/lock.png)
 
 **fcntl函数的cmd参数详细说明**
 
-![fcntlparam](images/zhuye/fcntlparam.png)
+![fcntlparam](images/fcntlparam.png)
 
 **设置和释放文件上的锁时，会合并和拆分锁**
 
-![fcntltip](images/zhuye/fcntltip.png)
+![fcntltip](images/fcntltip.png)
 
 
 
@@ -236,7 +236,7 @@ main(void)
 |TELL_CHILD()| tell child we are done|
 |WAIT_CHILD()| wait for child|
 
-![deadlock](images/zhuye/deadlock.png)
+![deadlock](images/deadlock.png)
 
 
 
@@ -245,7 +245,7 @@ main(void)
 * 当一个进程终止时，它所建立的锁全部释放
 * 无论一个描述符何时关闭，该进程通过这一描述符引用的文件上的任何一把锁都会释放（这些锁都是进程设置的）
 
-![clock_sf](images/zhuye/clock_sf.png)
+![clock_sf](images/clock_sf.png)
 
 
 
@@ -275,7 +275,7 @@ pause();
 
 父进程和子进程暂停（Pause()）后的数据结构情况
 
-<img src="images/zhuye/parentandchild.png" alt="parentandchild" style="zoom:100%;" />
+<img src="images/parentandchild.png" alt="parentandchild" style="zoom:100%;" />
 
 **上图需要注意**
 
@@ -296,7 +296,7 @@ unlock(fd, 0, SEEK_END);
 write(fd, buf, 1);
 ```
 
-<img src="images/zhuye/endlock.png" alt="endlock" style="zoom:100%;" />
+<img src="images/endlock.png" alt="endlock" style="zoom:100%;" />
 
 **上述代码分析：**
 
@@ -657,7 +657,7 @@ both return : number of bytes read or written, −1 on error
 */
 ```
 
-![iovec](images/zhuye/iovec.png)
+![iovec](images/iovec.png)
 
 ```c
 // 例子
@@ -696,7 +696,7 @@ int main(int argc , char **argv)
 
 #### 5.2 两次write、一次缓冲区复制一次write、一个writev时间消耗对比：
 
-![iovec](images/zhuye/writev_time.png)
+![iovec](images/writev_time.png)
 
 **少量数据时，两次write/read比一次writev/readv时间长，但是一次缓冲区复制一次写 时间更短。**
 
@@ -755,7 +755,7 @@ writen(int fd, const void *ptr, size_t n)
 
 ## 七、存储映射I/O:
 
-![memory-mapped](images/zhuye/memory_mapped.png)
+![memory-mapped](images/memory_mapped.png)
 
 **存储映射I/O（Memory-mapped I/O）**使一个磁盘文件与存储空间中的一个缓冲区相映射。于是当从缓冲区中取数据，就相当于读文件中的相应字节。与此类似，将数据存入缓冲区，则相应字节就自动地写入文件。这样就可以在不使用read和write的情况下执行I/O。为了使用这种功能，应首先告诉内核将一个给定的文件映射到一个存储区域中。这是由mmap函数实现的。
 
@@ -832,13 +832,13 @@ void *mmap(void *addr, size_t len, int prot, int flag, int fd, off_t off);
 
 * **情形一：一个文件的大小是5000字节，mmap函数从一个文件的起始位置开始，映射5000字节到虚拟内存中。**
 
-![Snipaste_2020-07-07_11-21-30](images/zhuye/Snipaste_2020-07-07_11-21-30.png)
+![Snipaste_2020-07-07_11-21-30](images/Snipaste_2020-07-07_11-21-30.png)
 
 ***
 
 * **情形二：一个文件的大小是5000字节，mmap函数从一个文件的起始位置开始，映射15000字节到虚拟内存中，即映射大小超过了原始文件的大小。**
 
-![Snipaste_2020-07-07_11-21-04](images/zhuye/Snipaste_2020-07-07_11-21-04.png)
+![Snipaste_2020-07-07_11-21-04](images/Snipaste_2020-07-07_11-21-04.png)
 
 * **情形三：一个文件初始大小为0，使用mmap操作映射了1000\*4K的大小，即1000个物理页大约4M字节空间，mmap返回指针ptr。**
 
