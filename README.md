@@ -7,6 +7,7 @@
 5. 《高可用架构（第1卷）》
 6. 《剑指offer》
 7. 《Python高效开发实战：Django、Tornado、Flask、Twisted》
+8. [《APUE》](https://github.com/zhuye-7/The-back-end-learning/tree/master/Books/AUPE)
 
 ### 算法：
 
