@@ -6,19 +6,19 @@
 
 ![project1](project1.png)
 
-这里我自己在vscode中重装project manager和gitlens多次都无法解决
+* 首先，这里我自己在vscode中重装project manager和gitlens多次都无法解决。所以怀疑不是这里的问题，可能是在添加之后的设置问题
 
-于是想着这里肯定是写到了workspace设置里面，但是打开了workspace setting文件，发现也是空的。这就奇怪了。
+* 猜想设置内容肯定是写到了workspace设置里面，但是打开了workspace setting文件，发现也是空的。这就奇怪了
 
-于是一层层找目录文件，才发现workspace的设置数据都保存在了`AppData\Roaming\Code\User\workspaceStorage`路径下
+* 于是一层层找目录文件，才发现workspace的设置数据都保存在了`AppData\Roaming\Code\User\workspaceStorage`路径下
 
 ![workspace_setting](workspace_setting.png)
 
 
 
-一般这里会有三个文件，前两个`state.vscdb和state.vscdb.backup`一看就知道，肯定是workspace设置数据文件了，打开看了下，果然是sqlite数据库文件
+1. 一般这里会有三个文件，前两个`state.vscdb和state.vscdb.backup`一看就知道，肯定是workspace设置数据文件了，打开看了下，果然是sqlite数据库文件
 
-第三个文件`workspace.json`打开看了下：
+2. 第三个文件`workspace.json`打开看了下：
 
 ```json
 {
@@ -26,9 +26,9 @@
 }
 ```
 
-可以得知这里只是指明该目录中的对应的workspace路径
+* 可以得知这里只是指明该目录中的对应的workspace路径
 
-所以上面是应该是此workspace的设置文件，那是否可以将该设置文件给其他项目使用呢？
+* 所以上面是应该是此workspace的设置文件，那是否可以将该设置文件给其他项目使用呢？
 
 **实践一下**
 
